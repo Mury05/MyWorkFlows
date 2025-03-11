@@ -63,7 +63,13 @@ jobs:
           DB_PASSWORD: password
 
       - name: Run Laravel Pint (Code Style)
-        run: ./vendor/bin/pint
+        run: ./vendor/bin/pint      
+
+      - name: Install Larastan
+        run: composer require --dev nunomaduro/larastan
+
+      - name: Run Larastan
+        run: vendor/bin/phpstan analyse app database resources routes --memory-limit=1G
 
       - name: Run Tests
         env:
